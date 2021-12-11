@@ -5,4 +5,5 @@ PPublisher is a GTK3 application for "easily" creating PPUB (Portable PUBlicatio
 At some point I'll package this and the dependencies so you don't need to remotely read my mind to get it working...
 
 ## Useful links
- *coming soon* when I publish everything
+* [PyPPUB](https://github.com/Tilo15/PyPPUB) - Python library for reading and writing PPUB and PPIX formats
+* [Php PPUB](https://github.com/Tilo15/php-ppub) - Simple PHP blogging platform reading PPUB and PPIX formats
