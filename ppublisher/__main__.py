@@ -3,6 +3,7 @@ gi.require_version("Gtk", "3.0")
 from gi.repository import GLib, Gio, Gtk
 
 import sys
+import os
 from ppublisher.file_item import FileItem
 from ppublisher.metadata import MetadataEditor
 from ppublisher.file_editor import FileEditor
@@ -87,6 +88,7 @@ class AppWindow(Gtk.ApplicationWindow):
         builder = PpixBuilder()
         import glob
         paths = glob.glob(folder_path + "/*.ppub")
+        paths = sorted(paths, key= lambda p: os.stat(p).st_ctime, reverse=True)
         for path in paths:
             builder.add_publication(path.split("/")[-1], ppub.Ppub.from_stream(open(path, 'rb')))
 
