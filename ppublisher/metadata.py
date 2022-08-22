@@ -34,7 +34,8 @@ class MetadataEditor(Gtk.Box):
         self.metadata.title = self.title_edit.get_text()
         self.metadata.author = self.author_edit.get_text()
         self.metadata.description = self.description_edit.get_text()
-        self.metadata.tags = self.tags_edit.get_text()
+        if(self.tags_edit.get_text() != ""):
+            self.metadata.tags = self.tags_edit.get_text()
         self.metadata.licence = self.licence_edit.get_text()
         self.metadata.copyright = self.copyright_edit.get_text()
 

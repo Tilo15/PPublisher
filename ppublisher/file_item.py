@@ -21,10 +21,14 @@ class FileItem(Gtk.Box):
         self.path = path
         self.filename = "metadata"
         self.is_main = False
+        self.is_poster = False
         self.is_metadata = is_metadata
 
         if(not is_metadata):
-            self.mimetype = mimetypes.guess_type(path)[0] or "application/octet-stream"
+            if(path.endswith(".pvpd")):
+                self.mimetype = "application/x-pvpd"
+            else:
+                self.mimetype = mimetypes.guess_type(path)[0] or "application/octet-stream"
             self.filename = os.path.split(path)[1]
             self.list_filename.set_text(self.filename)
             self.list_mimetype.set_text(self.mimetype)
@@ -51,6 +55,9 @@ class FileItem(Gtk.Box):
                 self.star.set_from_icon_name("starred-symbolic", Gtk.IconSize.MENU)
             else:
                 self.star.set_from_icon_name("non-starred-symbolic", Gtk.IconSize.MENU)
+
+    def set_poster(self, poster):
+        self.is_poster = poster
 
     def build_metadata(self):
         metadata = ppub_builder.Metadata()

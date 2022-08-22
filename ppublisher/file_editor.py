@@ -13,6 +13,7 @@ class FileEditor(Gtk.Box):
     editor_filename: Gtk.Label = Gtk.Template.Child()
     editor_mimetype: Gtk.Label = Gtk.Template.Child()
     editor_default_document: Gtk.CheckButton = Gtk.Template.Child()
+    editor_poster_document: Gtk.CheckButton = Gtk.Template.Child()
 
     def __init__(self, file, window):
         super(Gtk.Box, self).__init__()
@@ -31,5 +32,13 @@ class FileEditor(Gtk.Box):
             self.window.set_default_document(self.file)
         else:
             self.window.set_default_document(None)
+
+    @Gtk.Template.Callback()
+    def poster_toggled(self, widget):
+        enabled = widget.get_active()
+        if(enabled):
+            self.window.set_poster_document(self.file)
+        else:
+            self.window.set_poster_document(None)
 
 

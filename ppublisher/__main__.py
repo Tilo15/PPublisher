@@ -46,10 +46,24 @@ class AppWindow(Gtk.ApplicationWindow):
         if(item != None):
             item.set_main(True)
 
+    def set_poster_document(self, item):
+        items = self.get_all_items()
+        for i in items:
+            i.set_poster(False)
+        if(item != None):
+            item.set_poster(True)
+
     def get_default_document(self):
         items = self.get_all_items()
         for item in items:
             if(item.is_main):
+                return item
+        return None
+
+    def get_poster_document(self):
+        items = self.get_all_items()
+        for item in items:
+            if(item.is_poster):
                 return item
         return None
 
@@ -68,6 +82,11 @@ class AppWindow(Gtk.ApplicationWindow):
 
         builder = ppub_builder.PpubBuilder()
         builder.metadata = metadata.build_metadata()
+
+        poster = self.get_poster_document()
+        if(poster != None):
+            builder.metadata.set_value("poster", poster.filename)
+
         self.add_asset(builder, default)
         for item in self.get_all_items():
             if(item == metadata or item == default):
